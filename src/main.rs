@@ -16,6 +16,7 @@
 
 use std::env;
 use std::fs::File;
+use std::io;
 use std::io::prelude::*;
 use std::process;
 
@@ -44,17 +45,27 @@ fn main() {
         }
 
         // Read one or more files
-        // TODO: more user-friendly error handling
         for i in &args[1..] {
             let filename = i;
 
-            let mut f = File::open(filename).expect("file not found");
-
-            let mut contents = String::new();
-            f.read_to_string(&mut contents)
-                .expect("unable to read file");
-            
-            print!("{}", contents);
+            // Print the file contents or an error message
+            match read_from_file(filename) {
+                Ok(contents) => {
+                    print!("{}", contents);
+                },
+                Err(error) => {
+                    eprintln!("{}: {}", filename, error);
+                    continue;
+                }
+            };
         }
     }
+}
+
+// Try to open and read from a given file
+// Returns the contents of the file or an error
+fn read_from_file(filename: &String) -> Result<String, io::Error> {
+    let mut contents = String::new();
+    File::open(filename)?.read_to_string(&mut contents)?;
+    Ok(contents)
 }
