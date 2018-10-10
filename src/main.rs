@@ -34,7 +34,7 @@ fn main() {
             f.read_to_string(&mut contents)
                 .expect("unable to read file");
             
-            println!("{}", contents);
+            print!("{}", contents);
         }
     }
 }
