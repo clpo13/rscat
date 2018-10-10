@@ -1,6 +1,15 @@
 [package]
 name = "rscat"
 version = "0.1.0"
-authors = ["Cody <clpo13@gmail.com>"]
+authors = ["Cody Logan <clpo13@gmail.com>"]
+description = "cat clone implemented in Rust"
+repository = "https://github.com/clpo13/rscat"
+readme = "README.md"
+keywords = ["cat", "concatenate"]
+categories = ["command-line-utilities", "filesystem"]
+license = "GPL-3.0-or-later"
+
+[badges]
+travis-ci = { repository = "clpo13/rscat", branch = "master" }
 
 [dependencies]
