@@ -6,7 +6,8 @@ a list of files and it will print their contents to stdout.
 ## Building
 
 Building from source requires Rust and Cargo (install them via rustup). In the
-top-level source directory, run `cargo build`.
+top-level source directory, run `cargo build`. To install it on your computer,
+run `cargo install`. The default install path is in your `~/.cargo/bin` directory.
 
 ## Running
 

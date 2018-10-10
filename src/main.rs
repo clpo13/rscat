@@ -39,8 +39,8 @@ fn main() {
             println!("Usage: rscat file1 file2 ...");
             println!("Prints the contents of one or more files to stdout.");
             println!();
-            println!("  --help     prints this message and quits");
-            println!("  --version  prints version info and quits");
+            println!("  --help     prints this help message");
+            println!("  --version  outputs the program version number and license information");
             process::exit(0);
         }
 
