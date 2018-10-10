@@ -25,15 +25,16 @@ fn main() {
     // If there aren't any arguments, do nothing.
     // TODO: read from stdin instead
     if args.len() > 1 {
-        // TODO: read from more than one file
-        let filename = &args[1];
+        for i in &args[1..] {
+            let filename = i;
 
-        let mut f = File::open(filename).expect("file not found");
+            let mut f = File::open(filename).expect("file not found");
 
-        let mut contents = String::new();
-        f.read_to_string(&mut contents)
-            .expect("unable to read file");
-        
-        println!("{}", contents);
+            let mut contents = String::new();
+            f.read_to_string(&mut contents)
+                .expect("unable to read file");
+            
+            println!("{}", contents);
+        }
     }
 }
