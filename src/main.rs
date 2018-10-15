@@ -69,3 +69,14 @@ fn read_from_file(filename: &String) -> Result<String, io::Error> {
     File::open(filename)?.read_to_string(&mut contents)?;
     Ok(contents)
 }
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn read_and_compare() {
+        use read_from_file;
+        let test_string = "hello,\r\n  world!";
+        let testfile = "test.txt".to_string();
+        assert_eq!(read_from_file(&testfile).unwrap(), test_string);
+    }
+}
