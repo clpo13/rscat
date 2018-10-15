@@ -20,6 +20,7 @@ use std::io;
 use std::io::prelude::*;
 use std::process;
 
+// Get program version number from Cargo metadata
 const VERSION: &'static str = env!("CARGO_PKG_VERSION");
 
 fn main() {
@@ -30,36 +31,38 @@ fn main() {
     // TODO: read from stdin instead
     if args.len() > 1 {
         // Check for help and version flags
-        if args[1] == "--version" {
-            println!("rscat {} - Copyright (C) 2018 Cody Logan", VERSION);
-            println!("This is free software, and you are welcome to modify or redistribute it under");
-            println!("the terms of the GNU GPL Version 3 or later <http://gnu.org/licenses/gpl.html>.");
-            println!("This program comes with ABSOLUTELY NO WARRANTY to the extent permitted by law.");
-            process::exit(0);
-        }
-        if args[1] == "--help" {
-            println!("Usage: rscat file1 file2 ...");
-            println!("Prints the contents of one or more files to stdout.");
-            println!();
-            println!("  --help     print this help message");
-            println!("  --version  output the program version number and license information");
-            process::exit(0);
-        }
-
-        // Read one or more files
-        for i in &args[1..] {
-            let filename = i;
-
-            // Print the file contents or an error message
-            match read_from_file(filename) {
-                Ok(contents) => {
-                    print!("{}", contents);
-                },
-                Err(error) => {
-                    eprintln!("{}: {}", filename, error);
-                    continue;
+        match args[1].as_ref() {
+            "-v" | "--version" => {
+                println!("rscat v{} - Copyright (C) 2018 Cody Logan", VERSION);
+                println!("This is free software, and you are welcome to modify or redistribute it under");
+                println!("the terms of the GNU GPL Version 3 or later <http://gnu.org/licenses/gpl.html>.");
+                println!("This program comes with ABSOLUTELY NO WARRANTY to the extent permitted by law.");
+                process::exit(0);
+            },
+            "-h" | "--help" => {
+                println!("Usage: rscat file1 file2 ...");
+                println!("Prints the contents of one or more files to stdout.");
+                println!();
+                println!("  -h, --help     print this help message");
+                println!("  -v, --version  output the program version number and license information");
+                process::exit(0);
+            },
+            // No supported flags, move on
+            _ => {
+                // Read one or more files
+                for filename in &args[1..] {
+                    // Print the file contents or an error message
+                    match read_from_file(filename) {
+                        Ok(contents) => {
+                            print!("{}", contents);
+                        },
+                        Err(error) => {
+                            eprintln!("{}: {}", filename, error);
+                            continue;
+                        }
+                    };
                 }
-            };
+            }
         }
     }
 }
@@ -72,6 +75,7 @@ fn read_from_file(filename: &String) -> Result<String, io::Error> {
     Ok(contents)
 }
 
+// Unit tests
 #[cfg(test)]
 mod tests {
     #[test]
