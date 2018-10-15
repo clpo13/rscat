@@ -15,8 +15,8 @@ run `cargo install`. The default install path is in your `~/.cargo/bin` director
 Usage: rscat file1 file2 ...
 Prints the contents of one or more files to stdout.
 
-  --help     prints a brief help message
-  --version  outputs the program version number and license information
+  --help     print a brief help message
+  --version  output the program version number and license information
 ```
 
 ## License

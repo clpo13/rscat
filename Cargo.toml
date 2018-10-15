@@ -2,7 +2,7 @@
 name = "rscat"
 version = "0.1.0"
 authors = ["Cody Logan <clpo13@gmail.com>"]
-description = "cat clone implemented in Rust"
+description = "GNU cat(1) clone implemented in Rust"
 repository = "https://github.com/clpo13/rscat"
 readme = "README.md"
 keywords = ["cat", "concatenate"]

@@ -20,6 +20,8 @@ use std::io;
 use std::io::prelude::*;
 use std::process;
 
+const VERSION: &'static str = env!("CARGO_PKG_VERSION");
+
 fn main() {
     // Collect command line arguments
     let args: Vec<String> = env::args().collect();
@@ -29,7 +31,7 @@ fn main() {
     if args.len() > 1 {
         // Check for help and version flags
         if args[1] == "--version" {
-            println!("rscat 0.1.0 - Copyright (C) 2018 Cody Logan");
+            println!("rscat {} - Copyright (C) 2018 Cody Logan", VERSION);
             println!("This is free software, and you are welcome to modify or redistribute it under");
             println!("the terms of the GNU GPL Version 3 or later <http://gnu.org/licenses/gpl.html>.");
             println!("This program comes with ABSOLUTELY NO WARRANTY to the extent permitted by law.");
@@ -39,8 +41,8 @@ fn main() {
             println!("Usage: rscat file1 file2 ...");
             println!("Prints the contents of one or more files to stdout.");
             println!();
-            println!("  --help     prints this help message");
-            println!("  --version  outputs the program version number and license information");
+            println!("  --help     print this help message");
+            println!("  --version  output the program version number and license information");
             process::exit(0);
         }
 
@@ -76,7 +78,7 @@ mod tests {
     fn read_and_compare() {
         use read_from_file;
         let test_string = "hello,\n  world!";
-        let testfile = "test.txt".to_string();
+        let testfile = "tests/test.txt".to_string();
         assert_eq!(read_from_file(&testfile).unwrap(), test_string);
     }
 }
